@@ -23,8 +23,8 @@ public class AbstractReimbursement {
 
     private int id;
     private Status status;
-    private User author;
-    private User resolver;
+    private int author;
+    private int resolver;
     private double amount;
 
     public AbstractReimbursement() {
