@@ -61,7 +61,7 @@ public class Reimbursement {
 		super();
 	}
 	
-	public Reimbursement (int id, int author, int resolver, int amount, int status, int reimb_type) {
+	public Reimbursement (int id, int author, int amount, int reimb_type, int status,int resolver) {
 	super();
 	this.id = id;
 	this.author = author;
@@ -70,17 +70,17 @@ public class Reimbursement {
 	this.status = status;
 	this.reimb_type = reimb_type;
 	}
-	public Reimbursement (int author, int resolver, int amount, int status, int reimb_type) {
+	public Reimbursement (int author, int amount, int reimb_type, int status,int resolver) {
 		super();
 		this.author = author;
-		this.resolver = resolver;
 		this.amount = amount;
-		this.status = status;
 		this.reimb_type = reimb_type;
+		this.status = status;
+		this.resolver = resolver;
 		}
 	
 	public String toString() {
-		return "Reimbursement [id=" + id + ", author=" + author + ", resolver=" + resolver + ", amount=" + amount + ", status=" + status + ", type=" + reimb_type + "]"; 
+		return "Reimbursement [id=" + id + ", author=" + author + ", amount=" + amount + ", type=" + reimb_type + ", status=" + status + ", resolver=" + resolver  + "]"; 
 	}
 
 	@Override

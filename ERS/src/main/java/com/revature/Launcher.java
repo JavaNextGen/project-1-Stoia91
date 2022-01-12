@@ -3,7 +3,9 @@ package com.revature;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import com.revature.controllers.AuthController;
 import com.revature.controllers.ReimbursementController;
+import com.revature.controllers.UserController;
 import com.revature.repositories.ReimbursementDAO;
 import com.revature.util.ConnectionFactory;
 
@@ -14,8 +16,8 @@ public class Launcher {
 	public static void main(String[] args) {
 		
 
-
-		
+		UserController uc = new UserController();
+		AuthController ac = new AuthController();
 		ReimbursementController rc = new ReimbursementController();
 		
 		//Testing Database Connectivity - just testing whether our Connection (from ConnectionFactory) is successful
@@ -25,9 +27,9 @@ public class Launcher {
 			System.out.println("Connection failed");
 			e.printStackTrace();
 		}
-		ReimbursementDAO rDAO = new ReimbursementDAO();
-		System.out.println(rDAO.getReimbursements());
-		System.out.println("hi");
+//		ReimbursementDAO rDAO = new ReimbursementDAO();
+//		System.out.println(rDAO.getReimbursements());
+//		System.out.println("hi");
 		//Here is the actual functionality of our application-------------------
 		
 		//spoiler alert... there will only be two lines of codes here
@@ -51,9 +53,15 @@ public class Launcher {
 		
 		app.get("/reimbursements", rc.getReimbursementsHandler);
 		
+		app.put("/reimbursements", rc.updateReimbursementHandler);
 		
 		app.post("/reimbursements", rc.insertReimbursementHandler);
 		
+		app.get("/reimbursements/{id}", rc.getReimbursementsByAuthorHandler);
+		
+		app.post("/users", uc.insertUserHandler);
+		
+		app.post("/login", ac.loginHandler);
 		
 	}
 

@@ -53,6 +53,17 @@ public class ReimbursementService {
 		return Reimbursements;
 	}
 	
+    public List<Reimbursement> getReimbursementsByAuthor(int id){
+        List<Reimbursement> Reimbursements = rDAO.getReimbursementsByAuthor(id);
+            
+        if(Reimbursements.get(0).getAuthor() != 0){
+              return Reimbursements;
+            }
+            else{
+            throw new IndexOutOfBoundsException();
+            }
+        
+    }
 	public void addReimbursement(Reimbursement newReimbursement) {
 		
 		//take in the Employee object sent from the menu and send it to the EmployeeDAO to be inserted into the database
@@ -60,5 +71,11 @@ public class ReimbursementService {
 		//call the DAO method that inserts the new Employee
 		rDAO.insertReimbursement(newReimbursement);
 	}
-
+	public void updateReimbursement(Reimbursement newReimbursement) throws Exception {
+		
+		//take in the Employee object sent from the menu and send it to the EmployeeDAO to be inserted into the database
+		
+		//call the DAO method that inserts the new Employee
+		rDAO.updateReimbursement(newReimbursement);
+	}
 }

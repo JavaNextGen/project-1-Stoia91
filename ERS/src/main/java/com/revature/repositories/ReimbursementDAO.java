@@ -44,8 +44,8 @@ public class ReimbursementDAO {
 						rs.getInt("id"),
 						rs.getInt("author"),
 						rs.getInt("amount"),
-						rs.getInt("reimb_type"),
-						rs.getInt("status"),
+						rs.getInt("type_id"),
+						rs.getInt("status_id"),
 						rs.getInt("resolver")
 						);
 				
@@ -75,7 +75,7 @@ public class ReimbursementDAO {
 		try(Connection conn = ConnectionFactory.getConnection()){
 			
 			//we'll create a SQL statement using parameters to insert a new Reimbursement
-			String sql = "INSERT INTO reimbursements (author, amount, type, status, resolver) " //creating a line break for readability
+			String sql = "INSERT INTO reimbursements (author, amount, type_id, status_id, resolver) " //creating a line break for readability
 					    + "VALUES (?, ?, ?, ?, ?); "; //these are parameters!! We have to specify the value of each "?"
 			
 			PreparedStatement ps = conn.prepareStatement(sql); //we use PreparedStatements for SQL commands with variables
@@ -103,6 +103,77 @@ public class ReimbursementDAO {
 		}
 		
 	}
+
+
+
+	public void updateReimbursement(Reimbursement newReimbursement) {
+try(Connection conn = ConnectionFactory.getConnection()){
+			
+			//we'll create a SQL statement using parameters to insert a new Reimbursement
+			String sql = "Update reimbursements SET status_id = ?, resolver = ? WHERE id = ?;"; //these are parameters!! We have to specify the value of each "?"
+			
+			PreparedStatement ps = conn.prepareStatement(sql); //we use PreparedStatements for SQL commands with variables
+			
+			//use the PreparedStatement objects' methods to insert values into the query's ?s
+			//the values will come from the Employee object we send in.
+			 //1 is the first ?, 2 is the second, etc.
+			ps.setInt(1, newReimbursement.getStatus());
+			ps.setInt(2, newReimbursement.getResolver());
+			ps.setInt(3, newReimbursement.getId());
+			
+			
+			//this executeUpdate() method actually sends and executes the SQL command we built
+			ps.executeUpdate(); //we use executeUpdate() for inserts, updates, and deletes. 
+			//we use executeQuery() for selects
+			
+			//send confirmation to the console if successful.
+			System.out.println("Reimbursement " + " created.");
+			
+			
+		} catch(SQLException e) {
+			System.out.println("Add Reimbursement failed! :(");
+			e.printStackTrace();
+		}
+	}
+
+
+
+public List<Reimbursement> getReimbursementsByAuthor(int id) { 
+        
+        try(Connection conn = ConnectionFactory.getConnection()){ 
+    
+            ResultSet rs = null;
+            System.out.println(id);
+            String sql = "SELECT * FROM reimbursements WHERE author = " + id + " ;";
+            
+            Statement statement = conn.createStatement();
+        
+            rs = statement.executeQuery(sql);
+            
+            List<Reimbursement> reimbursementList = new ArrayList<>();
+            
+                while(rs.next()) {
+                
+                Reimbursement r = new Reimbursement(
+                
+                        rs.getInt("id"),
+                        rs.getInt("author"),
+                        rs.getInt("amount"),
+                        rs.getInt("status_id"),
+                        rs.getInt("type_id"),
+                        rs.getInt("resolver")
+                        
+                        );
+                reimbursementList.add(r); 
+            }
+            return reimbursementList;
+        }    
+        catch (SQLException e) {
+            System.out.println("Something went wrong selecting reimbursements!");
+            e.printStackTrace();
+        }
+        return null; 
+    }
 
 
 
