@@ -56,4 +56,28 @@ public class AuthController {
 		}
 		
 	};
+
+	public Handler getUserIDhandler = (ctx) -> {
+		
+		if(ctx.req.getSession() != null) {
+
+
+		String body = ctx.body(); //turn the body (data) of the POST request into a Java String
+
+		Gson gson = new Gson(); //create a new Gson object to make Java <-> JSON conversions
+		
+		User user = gson.fromJson(body, User.class); //turn that JSON String into a LoginDTO object
+		@SuppressWarnings("deprecation")
+		Integer intid = new Integer(as.getID(user.getUsername(), user.getUserpassword()));
+		
+		String id = intid.toString();
+		//control flow to determine what happens in the event of successful/unsuccessful login
+		//invoke the login() method of the AuthService using the username and password from the LoginDTO
+		ctx.result(id);
+		ctx.status(200);
+		}else {
+			ctx.result("UserName/Password pair not found");
+			ctx.status(404);
+		}
+	};
 }

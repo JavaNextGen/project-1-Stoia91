@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #main {
+			position: absolute;
+			top: 10%;
+			left: 30%;
+		}
+        body{
+            background-color: lightgrey;
+        }
+    </style>
+</head>
+<body>
+    <div id = "main">
+        <div >
+        <h3 style= "color: green;">Enter User Information:</h3>
+        </div>
+    
+        <!-- username, userpassword, f_name, l_name, email, role_id-->
+        
+        <label>Username &emsp;</label>
+        <input type="text" id="username"  name="newuser">
+        <label>&emsp;Password</label>
+        <input type="text" id="userpassword"  name="newuser" >
+        <br>
+        <label>First Name &ensp;</label>
+        <input type="text" id="f_name"  name="newuser" >
+        <label>&ensp;Last Name</label>
+        <input type="text" id="l_name"  name="newuser" >
+        <br>
+        <label>Email &nbsp; &emsp;&emsp;</label>
+        <input type="text" id="email"  name="newuser" placeholder="@something.com">
+        <label>&emsp;&ensp;&nbsp;Role ID</label>
+        <input type="text" id="role_id"  name="newuser">
+        <br>
+        <br>
+        <button id = "createbtn" value="Create new user">Create a new user</button>
+        
+    </div>
+    <script src="create.js"></script>
+</body>
+</html>

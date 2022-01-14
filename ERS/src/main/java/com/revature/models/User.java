@@ -22,6 +22,12 @@ public class User {
 		return username;
 	}
 
+	@Override
+	public String toString() {
+		return "User [user_id=" + user_id + ", username=" + username + ", userpassword=" + userpassword + ", f_name="
+				+ f_name + ", l_name=" + l_name + ", email=" + email + ", role_id=" + role_id + "]";
+	}
+
 	public void setUsername(String username) {
 		this.username = username;
 	}

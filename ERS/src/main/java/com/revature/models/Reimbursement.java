@@ -70,13 +70,18 @@ public class Reimbursement {
 	this.status = status;
 	this.reimb_type = reimb_type;
 	}
-	public Reimbursement (int author, int amount, int reimb_type, int status,int resolver) {
+	public Reimbursement (int id,int status,int resolver) {
+		super();
+		this.id = id;
+		this.resolver = resolver;
+		this.status = status;
+		}
+	public Reimbursement (int author, int amount, int reimb_type, int status) {
 		super();
 		this.author = author;
 		this.amount = amount;
 		this.reimb_type = reimb_type;
 		this.status = status;
-		this.resolver = resolver;
 		}
 	
 	public String toString() {

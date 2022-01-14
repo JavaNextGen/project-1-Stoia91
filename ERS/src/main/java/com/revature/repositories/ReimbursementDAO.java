@@ -75,8 +75,8 @@ public class ReimbursementDAO {
 		try(Connection conn = ConnectionFactory.getConnection()){
 			
 			//we'll create a SQL statement using parameters to insert a new Reimbursement
-			String sql = "INSERT INTO reimbursements (author, amount, type_id, status_id, resolver) " //creating a line break for readability
-					    + "VALUES (?, ?, ?, ?, ?); "; //these are parameters!! We have to specify the value of each "?"
+			String sql = "INSERT INTO reimbursements (author, amount, type_id, status_id) " //creating a line break for readability
+					    + "VALUES (?, ?, ?, 1); "; //these are parameters!! We have to specify the value of each "?"
 			
 			PreparedStatement ps = conn.prepareStatement(sql); //we use PreparedStatements for SQL commands with variables
 			
@@ -85,9 +85,6 @@ public class ReimbursementDAO {
 			ps.setInt(1, newReimbursement.getAuthor()); //1 is the first ?, 2 is the second, etc.
 			ps.setInt(2, newReimbursement.getAmount());
 			ps.setInt(3, newReimbursement.getReimb_type());
-			ps.setInt(4, newReimbursement.getStatus());
-			ps.setInt(5, newReimbursement.getResolver());
-			
 			
 			//this executeUpdate() method actually sends and executes the SQL command we built
 			ps.executeUpdate(); //we use executeUpdate() for inserts, updates, and deletes. 
@@ -159,8 +156,8 @@ public List<Reimbursement> getReimbursementsByAuthor(int id) {
                         rs.getInt("id"),
                         rs.getInt("author"),
                         rs.getInt("amount"),
-                        rs.getInt("status_id"),
                         rs.getInt("type_id"),
+                        rs.getInt("status_id"),
                         rs.getInt("resolver")
                         
                         );

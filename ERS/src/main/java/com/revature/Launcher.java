@@ -63,6 +63,8 @@ public class Launcher {
 		
 		app.post("/login", ac.loginHandler);
 		
+		app.post("/login/getID", ac.getUserIDhandler);
+		
 	}
 
 }

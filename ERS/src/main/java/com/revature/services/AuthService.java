@@ -26,4 +26,9 @@ public int login(String username, String password) {
 		return 0;
 	}
 }
+
+public int getID(String username, String password) {
+	
+	return aDAO.getID(username, password);
+}
 }
